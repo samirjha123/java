@@ -21,16 +21,22 @@
 default['java']['install_flavor'] = "openjdk"
 default['java']['jdk_version'] = '6'
 default['java']['arch'] = kernel['machine'] =~ /x86_64/ ? "x86_64" : "i586"
+default['java']['accept_license_agreement'] = true
 
 case platform
 when "centos","redhat","fedora"
   default['java']['java_home'] = "/usr/lib/jvm/java"
+ default['java']['oracle']['accept_oracle_download_terms'] = true
 when "freebsd"
   default['java']['java_home'] = "/usr/local/openjdk#{java['jdk_version']}"
+ default['java']['oracle']['accept_oracle_download_terms'] = true
 when "arch"
   default['java']['java_home'] = "//usr/lib/jvm/java-#{java['jdk_version']}-openjdk"
+   default['java']['oracle']['accept_oracle_download_terms'] = true
 else
   default['java']['java_home'] = "/usr/lib/jvm/default-java"
+  default['java']['oracle']['accept_oracle_download_terms'] = true
+
 end
 
 # jdk6 attributes
